@@ -12,6 +12,7 @@ using namespace HalconCpp;
 
 bool GenerateModel(const std::string& modelfile, const std::string& outfile = "./model", const float& sampledistance = 0.03) {
     std::cout << "======== create surface model begin ========" << std::endl;
+    std::cout << "sampledistance = "<< sampledistance << std::endl;
     HTuple hv_ObjectModel3DModel, hv_SFM, hv_Status;
     ReadObjectModel3d(modelfile.c_str(), "m", HTuple(), HTuple(), &hv_ObjectModel3DModel, &hv_Status);
     SurfaceNormalsObjectModel3d(hv_ObjectModel3DModel, "mls", HTuple(), HTuple(), &hv_ObjectModel3DModel);
@@ -40,9 +41,12 @@ Matching(const HTuple& hv_SFM,
     SurfaceNormalsObjectModel3d(hv_ObjectModel3DScene, "mls", HTuple(), HTuple(), &hv_ObjectModel3DSceneReduced);
     FindSurfaceModel(hv_SFM, hv_ObjectModel3DSceneReduced, 0.05, sampledistance, min_score, "true", 
         "num_matches", 10, &hv_Pose, &hv_Score, &hv_SurfaceMatchingResultID);
+    
     for (int i = 0; i < hv_Score.Length(); i++)
         std::cout << "hv_Score = " << hv_Score[i].D() << std::endl;
+    
     std::vector<Eigen::Matrix4f> vec;
+
     if (hv_Pose.Length() != 0) {
         for (int num = 0; num < hv_Pose.Length() / 7; num++) {
             GetSurfaceMatchingResult(hv_SurfaceMatchingResultID, "pose", num, &hv_ResultValue);
@@ -75,6 +79,7 @@ Matching(const std::string& model_name_sfm,
          const float& sampledistance = 0.3,
          const float& min_score = 0.3) {
     
+    std::cout << "sampledistance = "<< sampledistance << std::endl;
     auto t1 = clock();
     // Local control variables
     HTuple  hv_ObjectModel3DSceneReduced, hv_SFM;
