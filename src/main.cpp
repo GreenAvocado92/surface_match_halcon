@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
         ("sfm", bpo::value<std::string>(), "set SFM file path")
         ("sd", bpo::value<float>(), "sample distance");
 
-    // ´´½¨Ò»¸ö´æ´¢½âÎöºóµÄÃüÁîÐÐ²ÎÊýµÄ±äÁ¿
+    // ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿?
     bpo::variables_map vm;
     bpo::store(bpo::parse_command_line(argc, argv, desc), vm);
     bpo::notify(vm);
@@ -45,7 +45,7 @@ int main(int argc, char const *argv[])
     }
 
     if (vm.count("mode")) {
-        // std::cout << "ÊäÈëÎÄ¼þ: " << vm["mode"].as<std::string>() << "\n";
+        // std::cout << "ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½: " << vm["mode"].as<std::string>() << "\n";
         if (vm["mode"].as<std::string>() == "train") {
             if (!vm.count("model")) {
                 std::cout << "please input model file path, this file should be a clear pointcloud file" << std::endl;
@@ -87,7 +87,7 @@ int main(int argc, char const *argv[])
         std::cout << "please input mode type" << std::endl;
     }
 
-    system("pause");
+    // system("pause");
     
     return 0;
 }
